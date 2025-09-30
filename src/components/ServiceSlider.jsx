@@ -1,6 +1,6 @@
 import React from "react";
 import Slider from "react-slick";
-import { FaArrowLeft , FaArrowRight} from "react-icons/fa";
+import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
@@ -37,25 +37,25 @@ const services = [
   },
 ];
 
-// Custom navigation buttons
-const NextArrow = ({ onClick }) => (
-  <button
+// ✅ Fixed Arrows (must accept className, style, onClick)
+const NextArrow = ({ className, style, onClick }) => (
+  <div
+    className={`${className} !flex items-center justify-center bg-white text-black shadow-md rounded-full w-8 h-8 sm:w-10 sm:h-10 z-10`}
+    style={{ ...style }}
     onClick={onClick}
-    className="absolute right-3 top-1/2 -translate-y-1/2 bg-white text-black shadow-lg border-white border-2 transition rounded-full w-10 h-10 flex items-center justify-center z-10"
   >
-  
-<FaArrowRight  /> 
-  </button>
+    <FaArrowRight />
+  </div>
 );
 
-const PrevArrow = ({ onClick }) => (
-  <button
-    className="absolute left-3 top-1/2 -translate-y-1/2 bg-white text-black shadow-lg border-white border-2  transition rounded-full w-10 h-10 flex items-center justify-center z-10"
-
+const PrevArrow = ({ className, style, onClick }) => (
+  <div
+    className={`${className} !flex items-center justify-center bg-white text-black shadow-md rounded-full w-8 h-8 sm:w-10 sm:h-10 z-10`}
+    style={{ ...style }}
     onClick={onClick}
   >
-     <FaArrowLeft  />
-  </button>
+    <FaArrowLeft />
+  </div>
 );
 
 export default function ServiceSlider() {
@@ -70,49 +70,47 @@ export default function ServiceSlider() {
     prevArrow: <PrevArrow />,
     responsive: [
       {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 2,
-        },
+        breakpoint: 1280,
+        settings: { slidesToShow: 3 },
       },
       {
-        breakpoint: 640,
-        settings: {
-          slidesToShow: 1,
-        },
+        breakpoint: 1024,
+        settings: { slidesToShow: 2 },
+      },
+      {
+        breakpoint: 768,
+        settings: { slidesToShow: 1 },
       },
     ],
   };
 
   return (
-    <div className="block w-full max-w-6xl mt-10 mx-auto py-6 relative">
+    <div className="block w-full max-w-6xl mt-6 sm:mt-10 mx-auto py-6 relative px-4">
       <Slider {...settings}>
         {services.map((service, idx) => (
           <div key={idx} className="px-2">
             <div
-              className={`rounded-2xl shadow-lg bg-gradient-to-r ${service.color} text-white flex items-center justify-between p-6 h-60`}
+              className={`rounded-2xl shadow-lg bg-gradient-to-r ${service.color} text-white flex flex-col md:flex-row items-center md:items-stretch justify-between p-4 sm:p-6 h-auto md:h-60 gap-4`}
             >
-              {/* Left text content */}
-              <div className="flex flex-col gap-3 max-w-md">
-                <h2 className="text-2xl font-bold">{service.title}</h2>
-                <p className="text-base">{service.desc}</p>
+              {/* Text */}
+              <div className="flex flex-col gap-2 sm:gap-3 w-full md:w-2/3 text-center md:text-left">
+                <h2 className="text-lg sm:text-2xl font-bold">{service.title}</h2>
+                <p className="text-sm sm:text-base">{service.desc}</p>
                 <button
-                  className={`bg-gradient-to-r ${service.color} text-white px-6 py-2 rounded-xl w-fit shadow-md hover:brightness-110 transition`}
+                  className={`bg-gradient-to-r ${service.color} text-white px-5 sm:px-6 py-2 rounded-lg sm:rounded-xl w-fit mx-auto md:mx-0 shadow-md hover:brightness-110 transition`}
                 >
                   Book Now
                 </button>
               </div>
 
-              {/* Right image space */}
-            {/* Right image space */}
-<div className="w-1/3 h-full flex items-center justify-center overflow-hidden rounded-2xl">
-  <img
-    src={service.img}
-    alt={service.title}
-    className="w-full h-full object-cover rounded-2xl"
-  />
-</div>
-
+              {/* Image */}
+              <div className="w-full md:w-1/3 h-44 md:h-full flex items-center justify-center overflow-hidden rounded-xl">
+                <img
+                  src={service.img}
+                  alt={service.title}
+                  className="w-full h-full object-cover rounded-xl"
+                />
+              </div>
             </div>
           </div>
         ))}

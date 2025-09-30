@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { FaBolt, FaUsers, FaAward, FaMapMarkerAlt, FaStar } from "react-icons/fa";
 
 const StatsSection = () => {
-  // Store stats in state
   const [stats] = useState([
     {
       icon: <FaBolt className="w-6 h-6 text-white" />,
@@ -32,18 +31,21 @@ const StatsSection = () => {
   ]);
 
   return (
-    <div className="max-w-6xl mx-auto px-6 md:px-12">
-      <div className="bg-white rounded-2xl shadow-lg grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-8 py-10 px-6 text-center">
+    <div className="max-w-6xl mx-auto px-4 sm:px-6 md:px-12">
+      <div className="bg-white rounded-2xl shadow-lg grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6 sm:gap-8 py-10 px-4 sm:px-6 text-center">
         {stats.map((item, index) => (
-          <div key={index} className="flex flex-col items-center">
+          <div
+            key={index}
+            className="flex flex-col items-center transform transition duration-300 hover:scale-105"
+          >
             {/* Icon with gradient bg */}
             <div className="w-12 h-12 flex items-center justify-center rounded-xl bg-gradient-to-r from-blue-500 to-purple-500 mb-4 shadow-md">
               {item.icon}
             </div>
             {/* Value */}
-            <h3 className="text-2xl font-bold text-blue-600">{item.value}</h3>
+            <h3 className="text-xl sm:text-2xl font-bold text-blue-600">{item.value}</h3>
             {/* Label */}
-            <p className="text-gray-600 text-sm">{item.label}</p>
+            <p className="text-gray-600 text-xs sm:text-sm">{item.label}</p>
           </div>
         ))}
       </div>
